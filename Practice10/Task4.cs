@@ -136,7 +136,7 @@ class WeatherDiary
     }
 }
 
-class Program
+class Task4
 {
     static void Main(string[] args)
     {
