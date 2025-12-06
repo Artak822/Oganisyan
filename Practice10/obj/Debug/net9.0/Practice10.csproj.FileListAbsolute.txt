@@ -1,0 +1,15 @@
+C:\Колледж\VSCODE\C#\Oganisyan\Practice10\bin\Debug\net9.0\Practice10.exe
+C:\Колледж\VSCODE\C#\Oganisyan\Practice10\bin\Debug\net9.0\Practice10.deps.json
+C:\Колледж\VSCODE\C#\Oganisyan\Practice10\bin\Debug\net9.0\Practice10.runtimeconfig.json
+C:\Колледж\VSCODE\C#\Oganisyan\Practice10\bin\Debug\net9.0\Practice10.dll
+C:\Колледж\VSCODE\C#\Oganisyan\Practice10\bin\Debug\net9.0\Practice10.pdb
+C:\Колледж\VSCODE\C#\Oganisyan\Practice10\obj\Debug\net9.0\Practice10.GeneratedMSBuildEditorConfig.editorconfig
+C:\Колледж\VSCODE\C#\Oganisyan\Practice10\obj\Debug\net9.0\Practice10.AssemblyInfoInputs.cache
+C:\Колледж\VSCODE\C#\Oganisyan\Practice10\obj\Debug\net9.0\Practice10.AssemblyInfo.cs
+C:\Колледж\VSCODE\C#\Oganisyan\Practice10\obj\Debug\net9.0\Practice10.csproj.CoreCompileInputs.cache
+C:\Колледж\VSCODE\C#\Oganisyan\Practice10\obj\Debug\net9.0\Practice10.sourcelink.json
+C:\Колледж\VSCODE\C#\Oganisyan\Practice10\obj\Debug\net9.0\Practice10.dll
+C:\Колледж\VSCODE\C#\Oganisyan\Practice10\obj\Debug\net9.0\refint\Practice10.dll
+C:\Колледж\VSCODE\C#\Oganisyan\Practice10\obj\Debug\net9.0\Practice10.pdb
+C:\Колледж\VSCODE\C#\Oganisyan\Practice10\obj\Debug\net9.0\Practice10.genruntimeconfig.cache
+C:\Колледж\VSCODE\C#\Oganisyan\Practice10\obj\Debug\net9.0\ref\Practice10.dll
