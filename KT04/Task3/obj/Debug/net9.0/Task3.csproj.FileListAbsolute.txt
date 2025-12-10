@@ -1,0 +1,15 @@
+C:\Колледж\VSCODE\C#\Oganisyan\KT04\Task3\bin\Debug\net9.0\Task3.exe
+C:\Колледж\VSCODE\C#\Oganisyan\KT04\Task3\bin\Debug\net9.0\Task3.deps.json
+C:\Колледж\VSCODE\C#\Oganisyan\KT04\Task3\bin\Debug\net9.0\Task3.runtimeconfig.json
+C:\Колледж\VSCODE\C#\Oganisyan\KT04\Task3\bin\Debug\net9.0\Task3.dll
+C:\Колледж\VSCODE\C#\Oganisyan\KT04\Task3\bin\Debug\net9.0\Task3.pdb
+C:\Колледж\VSCODE\C#\Oganisyan\KT04\Task3\obj\Debug\net9.0\Task3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Колледж\VSCODE\C#\Oganisyan\KT04\Task3\obj\Debug\net9.0\Task3.AssemblyInfoInputs.cache
+C:\Колледж\VSCODE\C#\Oganisyan\KT04\Task3\obj\Debug\net9.0\Task3.AssemblyInfo.cs
+C:\Колледж\VSCODE\C#\Oganisyan\KT04\Task3\obj\Debug\net9.0\Task3.csproj.CoreCompileInputs.cache
+C:\Колледж\VSCODE\C#\Oganisyan\KT04\Task3\obj\Debug\net9.0\Task3.sourcelink.json
+C:\Колледж\VSCODE\C#\Oganisyan\KT04\Task3\obj\Debug\net9.0\Task3.dll
+C:\Колледж\VSCODE\C#\Oganisyan\KT04\Task3\obj\Debug\net9.0\refint\Task3.dll
+C:\Колледж\VSCODE\C#\Oganisyan\KT04\Task3\obj\Debug\net9.0\Task3.pdb
+C:\Колледж\VSCODE\C#\Oganisyan\KT04\Task3\obj\Debug\net9.0\Task3.genruntimeconfig.cache
+C:\Колледж\VSCODE\C#\Oganisyan\KT04\Task3\obj\Debug\net9.0\ref\Task3.dll
