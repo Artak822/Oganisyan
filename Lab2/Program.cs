@@ -6,12 +6,12 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("=== Лабораторная работа 2: Работа с коллекциями ===\n");
+        Console.WriteLine("Лабораторная работа 2\n");
 
         var benchmark = new PerformanceBenchmark();
         var results = benchmark.RunAllBenchmarks();
 
-        Console.WriteLine("\n=== Результаты замеров производительности ===\n");
+        Console.WriteLine("\nРезультаты:\n");
         PrintResults(results);
     }
 

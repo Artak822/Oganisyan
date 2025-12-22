@@ -3,11 +3,11 @@ using System.Diagnostics;
 
 namespace Lab2;
 
-public class PerformanceBenchmark
-{
-    private const int CollectionSize = 100_000;
-    private const int WarmupIterations = 3;
-    private const int MeasurementIterations = 5;
+    public class PerformanceBenchmark
+    {
+        private const int CollectionSize = 100000;
+        private const int WarmupIterations = 3;
+        private const int MeasurementIterations = 5;
 
     public class BenchmarkResult
     {
@@ -18,31 +18,28 @@ public class PerformanceBenchmark
         public double MaxTimeMs { get; set; }
     }
 
-    public List<BenchmarkResult> RunAllBenchmarks()
-    {
-        var results = new List<BenchmarkResult>();
+        public List<BenchmarkResult> RunAllBenchmarks()
+        {
+            var results = new List<BenchmarkResult>();
 
-        Console.WriteLine("Запуск бенчмарков производительности...");
-        Console.WriteLine($"Размер коллекций: {CollectionSize:N0} элементов");
-        Console.WriteLine($"Количество итераций: {MeasurementIterations}");
-        Console.WriteLine();
+            Console.WriteLine("Запуск бенчмарков...");
+            Console.WriteLine($"Размер: {CollectionSize} элементов");
+            Console.WriteLine();
 
-        // List benchmarks
-        results.AddRange(BenchmarkList());
-        results.AddRange(BenchmarkLinkedList());
-        results.AddRange(BenchmarkQueue());
-        results.AddRange(BenchmarkStack());
-        results.AddRange(BenchmarkImmutableList());
+            results.AddRange(BenchmarkList());
+            results.AddRange(BenchmarkLinkedList());
+            results.AddRange(BenchmarkQueue());
+            results.AddRange(BenchmarkStack());
+            results.AddRange(BenchmarkImmutableList());
 
-        return results;
-    }
+            return results;
+        }
 
     private List<BenchmarkResult> BenchmarkList()
     {
         var results = new List<BenchmarkResult>();
         Console.WriteLine("Тестирование List<T>...");
 
-        // Добавление в конец
         results.Add(Measure(() =>
         {
             var list = new List<int>();
@@ -52,7 +49,6 @@ public class PerformanceBenchmark
             }
         }, "List", "Добавление в конец"));
 
-        // Добавление в начало
         results.Add(Measure(() =>
         {
             var list = new List<int>();
@@ -62,7 +58,6 @@ public class PerformanceBenchmark
             }
         }, "List", "Добавление в начало"));
 
-        // Добавление в середину
         results.Add(Measure(() =>
         {
             var list = new List<int>();
@@ -72,7 +67,6 @@ public class PerformanceBenchmark
             }
         }, "List", "Добавление в середину"));
 
-        // Удаление из конца
         var listForRemoval = new List<int>(Enumerable.Range(0, CollectionSize));
         results.Add(Measure(() =>
         {
@@ -83,7 +77,6 @@ public class PerformanceBenchmark
             }
         }, "List", "Удаление из конца"));
 
-        // Удаление из начала
         results.Add(Measure(() =>
         {
             var tempList = new List<int>(listForRemoval);
@@ -93,7 +86,6 @@ public class PerformanceBenchmark
             }
         }, "List", "Удаление из начала"));
 
-        // Удаление из середины
         results.Add(Measure(() =>
         {
             var tempList = new List<int>(listForRemoval);
@@ -103,7 +95,6 @@ public class PerformanceBenchmark
             }
         }, "List", "Удаление из середины"));
 
-        // Поиск элемента
         var listForSearch = new List<int>(Enumerable.Range(0, CollectionSize));
         results.Add(Measure(() =>
         {
@@ -113,7 +104,6 @@ public class PerformanceBenchmark
             }
         }, "List", "Поиск элемента"));
 
-        // Получение по индексу
         results.Add(Measure(() =>
         {
             int sum = 0;
@@ -131,7 +121,6 @@ public class PerformanceBenchmark
         var results = new List<BenchmarkResult>();
         Console.WriteLine("Тестирование LinkedList<T>...");
 
-        // Добавление в конец
         results.Add(Measure(() =>
         {
             var list = new LinkedList<int>();
@@ -141,7 +130,6 @@ public class PerformanceBenchmark
             }
         }, "LinkedList", "Добавление в конец"));
 
-        // Добавление в начало
         results.Add(Measure(() =>
         {
             var list = new LinkedList<int>();
@@ -151,7 +139,6 @@ public class PerformanceBenchmark
             }
         }, "LinkedList", "Добавление в начало"));
 
-        // Добавление в середину
         results.Add(Measure(() =>
         {
             var list = new LinkedList<int>();
@@ -169,7 +156,6 @@ public class PerformanceBenchmark
             }
         }, "LinkedList", "Добавление в середину"));
 
-        // Удаление из конца
         var linkedListForRemoval = new LinkedList<int>(Enumerable.Range(0, CollectionSize));
         results.Add(Measure(() =>
         {
@@ -180,7 +166,6 @@ public class PerformanceBenchmark
             }
         }, "LinkedList", "Удаление из конца"));
 
-        // Удаление из начала
         results.Add(Measure(() =>
         {
             var tempList = new LinkedList<int>(linkedListForRemoval);
@@ -190,7 +175,6 @@ public class PerformanceBenchmark
             }
         }, "LinkedList", "Удаление из начала"));
 
-        // Удаление из середины
         results.Add(Measure(() =>
         {
             var tempList = new LinkedList<int>(linkedListForRemoval);
@@ -208,7 +192,6 @@ public class PerformanceBenchmark
             }
         }, "LinkedList", "Удаление из середины"));
 
-        // Поиск элемента
         var linkedListForSearch = new LinkedList<int>(Enumerable.Range(0, CollectionSize));
         results.Add(Measure(() =>
         {
@@ -218,7 +201,6 @@ public class PerformanceBenchmark
             }
         }, "LinkedList", "Поиск элемента"));
 
-        // Получение по индексу (неэффективно для LinkedList)
         results.Add(Measure(() =>
         {
             for (int idx = 0; idx < 100; idx++)
@@ -249,7 +231,6 @@ public class PerformanceBenchmark
             }
         }, "Queue", "Добавление в конец (Enqueue)"));
 
-        // Удаление из начала (Dequeue)
         var queueForRemoval = new Queue<int>(Enumerable.Range(0, CollectionSize));
         results.Add(Measure(() =>
         {
@@ -260,7 +241,6 @@ public class PerformanceBenchmark
             }
         }, "Queue", "Удаление из начала (Dequeue)"));
 
-        // Поиск элемента
         var queueForSearch = new Queue<int>(Enumerable.Range(0, CollectionSize));
         results.Add(Measure(() =>
         {
@@ -288,7 +268,6 @@ public class PerformanceBenchmark
             }
         }, "Stack", "Добавление в конец (Push)"));
 
-        // Удаление из конца (Pop)
         var stackForRemoval = new Stack<int>(Enumerable.Range(0, CollectionSize));
         results.Add(Measure(() =>
         {
@@ -299,7 +278,6 @@ public class PerformanceBenchmark
             }
         }, "Stack", "Удаление из конца (Pop)"));
 
-        // Поиск элемента
         var stackForSearch = new Stack<int>(Enumerable.Range(0, CollectionSize));
         results.Add(Measure(() =>
         {
@@ -317,7 +295,6 @@ public class PerformanceBenchmark
         var results = new List<BenchmarkResult>();
         Console.WriteLine("Тестирование ImmutableList<T>...");
 
-        // Добавление в конец
         results.Add(Measure(() =>
         {
             var list = ImmutableList<int>.Empty;
@@ -327,7 +304,6 @@ public class PerformanceBenchmark
             }
         }, "ImmutableList", "Добавление в конец"));
 
-        // Добавление в начало
         results.Add(Measure(() =>
         {
             var list = ImmutableList<int>.Empty;
@@ -337,7 +313,6 @@ public class PerformanceBenchmark
             }
         }, "ImmutableList", "Добавление в начало"));
 
-        // Добавление в середину
         results.Add(Measure(() =>
         {
             var list = ImmutableList<int>.Empty;
@@ -347,7 +322,6 @@ public class PerformanceBenchmark
             }
         }, "ImmutableList", "Добавление в середину"));
 
-        // Удаление из конца
         var immutableListForRemoval = ImmutableList<int>.Empty.AddRange(Enumerable.Range(0, CollectionSize));
         results.Add(Measure(() =>
         {
@@ -358,7 +332,6 @@ public class PerformanceBenchmark
             }
         }, "ImmutableList", "Удаление из конца"));
 
-        // Удаление из начала
         results.Add(Measure(() =>
         {
             var tempList = immutableListForRemoval;
@@ -368,7 +341,6 @@ public class PerformanceBenchmark
             }
         }, "ImmutableList", "Удаление из начала"));
 
-        // Удаление из середины
         results.Add(Measure(() =>
         {
             var tempList = immutableListForRemoval;
@@ -378,7 +350,6 @@ public class PerformanceBenchmark
             }
         }, "ImmutableList", "Удаление из середины"));
 
-        // Поиск элемента
         var immutableListForSearch = ImmutableList<int>.Empty.AddRange(Enumerable.Range(0, CollectionSize));
         results.Add(Measure(() =>
         {
@@ -388,7 +359,6 @@ public class PerformanceBenchmark
             }
         }, "ImmutableList", "Поиск элемента"));
 
-        // Получение по индексу
         results.Add(Measure(() =>
         {
             int sum = 0;
@@ -403,7 +373,6 @@ public class PerformanceBenchmark
 
     private BenchmarkResult Measure(Action action, string collectionType, string operation)
     {
-        // Прогрев
         for (int i = 0; i < WarmupIterations; i++)
         {
             action();
