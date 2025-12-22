@@ -10,7 +10,6 @@ namespace Lab1
         private bool _disposed = false;
         private readonly string _filePath;
 
-        // Конструктор, принимающий путь к файлу и режим открытия
         public FileResourceManager(string filePath, FileMode fileMode = FileMode.OpenOrCreate)
         {
             _filePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
@@ -25,14 +24,13 @@ namespace Lab1
             }
         }
 
-        // Открывает файл для записи
         public void OpenForWriting()
         {
             ThrowIfDisposed();
             
             if (_writer != null)
             {
-                return; // Уже открыт для записи
+                return;
             }
 
             if (_reader != null)
@@ -43,7 +41,7 @@ namespace Lab1
 
             try
             {
-                _fileStream?.Seek(0, SeekOrigin.End); // Перемещаемся в конец файла
+                _fileStream?.Seek(0, SeekOrigin.End);
                 _writer = new StreamWriter(_fileStream!, leaveOpen: true);
             }
             catch (Exception ex)
@@ -52,14 +50,13 @@ namespace Lab1
             }
         }
 
-        // Открывает файл для чтения
         public void OpenForReading()
         {
             ThrowIfDisposed();
             
             if (_reader != null)
             {
-                return; // Уже открыт для чтения
+                return;
             }
 
             if (_writer != null)
@@ -70,7 +67,7 @@ namespace Lab1
 
             try
             {
-                _fileStream?.Seek(0, SeekOrigin.Begin); // Перемещаемся в начало файла
+                _fileStream?.Seek(0, SeekOrigin.Begin);
                 _reader = new StreamReader(_fileStream!, leaveOpen: true);
             }
             catch (Exception ex)
@@ -79,7 +76,6 @@ namespace Lab1
             }
         }
 
-        // Записывает строку в файл
         public void WriteLine(string text)
         {
             ThrowIfDisposed();
@@ -92,7 +88,7 @@ namespace Lab1
             try
             {
                 _writer!.WriteLine(text);
-                _writer.Flush(); // Принудительно записываем в файл
+                _writer.Flush();
             }
             catch (Exception ex)
             {
@@ -100,7 +96,6 @@ namespace Lab1
             }
         }
 
-        // Читает весь файл
         public string ReadAllText()
         {
             ThrowIfDisposed();
@@ -126,7 +121,6 @@ namespace Lab1
             }
         }
 
-        // Добавляет текст в конец файла
         public void AppendText(string text)
         {
             ThrowIfDisposed();
@@ -153,7 +147,6 @@ namespace Lab1
             }
         }
 
-        // Возвращает информацию о файле (размер, дата создания)
         public FileInfo GetFileInfo()
         {
             ThrowIfDisposed();
@@ -173,7 +166,6 @@ namespace Lab1
             }
         }
 
-        // Реализация IDisposable
         public void Dispose()
         {
             Dispose(true);
@@ -186,7 +178,6 @@ namespace Lab1
             {
                 if (disposing)
                 {
-                    // Освобождаем управляемые ресурсы
                     using (_writer)
                     {
                         _writer?.Dispose();
@@ -210,7 +201,6 @@ namespace Lab1
             }
         }
 
-        // Проверка на освобождение ресурсов
         private void ThrowIfDisposed()
         {
             if (_disposed)
@@ -219,7 +209,6 @@ namespace Lab1
             }
         }
 
-        // Финализатор (на случай, если Dispose не был вызван)
         ~FileResourceManager()
         {
             Dispose(false);

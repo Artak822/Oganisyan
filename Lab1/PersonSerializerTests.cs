@@ -12,30 +12,27 @@ namespace Lab1
             _serializer = new PersonSerializer();
             _testDirectory = Path.Combine(Path.GetTempPath(), "Lab1Tests");
             
-            // Создаем тестовую директорию, если её нет
             if (!Directory.Exists(_testDirectory))
             {
                 Directory.CreateDirectory(_testDirectory);
             }
         }
 
-        // Вспомогательный метод для создания тестового Person
         private Person CreateTestPerson()
         {
             return new Person
             {
-                FirstName = "Иван",
-                LastName = "Иванов",
-                Age = 25,
+                FirstName = "Artak",
+                LastName = "Oganisyan",
+                Age = 18,
                 Password = "secret123",
                 Id = "12345",
                 BirthDate = new DateTime(1999, 1, 15),
-                Email = "ivan@example.com",
+                Email = "artak@example.com",
                 PhoneNumber = "+7-999-123-45-67"
             };
         }
 
-        // Вспомогательный метод для очистки тестовых файлов
         private void CleanupTestFiles()
         {
             if (Directory.Exists(_testDirectory))
@@ -52,7 +49,6 @@ namespace Lab1
             }
         }
 
-        // Тест 1: Сериализация в JSON
         public void TestSerializeToJson()
         {
             Console.WriteLine("Тест 1: Сериализация в JSON");
@@ -60,7 +56,6 @@ namespace Lab1
             var person = CreateTestPerson();
             string json = _serializer.SerializeToJson(person);
 
-            // Проверяем значения (поддерживаем как обычную кириллицу, так и Unicode escape-последовательности)
             bool hasFirstName = json.Contains("Иван") || json.Contains("\\u0418\\u0432\\u0430\\u043D") || json.Contains("\\u0418\\u0432\\u0430\\u043d");
             Assert(hasFirstName, $"JSON должен содержать FirstName. JSON: {json.Substring(0, Math.Min(200, json.Length))}");
             
@@ -72,10 +67,9 @@ namespace Lab1
             Assert(!json.Contains("Password"), "JSON НЕ должен содержать Password");
             Assert(!json.Contains("secret123"), "JSON НЕ должен содержать значение Password");
 
-            Console.WriteLine("✓ Тест пройден\n");
+            Console.WriteLine("Тест пройден\n");
         }
 
-        // Тест 2: Десериализация из JSON
         public void TestDeserializeFromJson()
         {
             Console.WriteLine("Тест 2: Десериализация из JSON");
@@ -92,10 +86,9 @@ namespace Lab1
             Assert(deserializedPerson.PhoneNumber == originalPerson.PhoneNumber, "PhoneNumber должен совпадать");
             Assert(deserializedPerson.BirthDate == originalPerson.BirthDate, "BirthDate должен совпадать");
 
-            Console.WriteLine("✓ Тест пройден\n");
+            Console.WriteLine("Тест пройден\n");
         }
 
-        // Тест 3: Сохранение в файл (синхронно)
         public void TestSaveToFile()
         {
             Console.WriteLine("Тест 3: Сохранение в файл (синхронно)");
@@ -111,7 +104,7 @@ namespace Lab1
                 string fileContent = File.ReadAllText(filePath);
                 Assert(fileContent.Contains("Иван"), "Файл должен содержать данные Person");
 
-                Console.WriteLine("✓ Тест пройден\n");
+                Console.WriteLine("Тест пройден\n");
             }
             finally
             {
@@ -119,7 +112,6 @@ namespace Lab1
             }
         }
 
-        // Тест 4: Загрузка из файла (синхронно)
         public void TestLoadFromFile()
         {
             Console.WriteLine("Тест 4: Загрузка из файла (синхронно)");
@@ -136,7 +128,7 @@ namespace Lab1
                 Assert(loadedPerson.LastName == originalPerson.LastName, "LastName должен совпадать");
                 Assert(loadedPerson.Age == originalPerson.Age, "Age должен совпадать");
 
-                Console.WriteLine("✓ Тест пройден\n");
+                Console.WriteLine("Тест пройден\n");
             }
             finally
             {
@@ -144,7 +136,6 @@ namespace Lab1
             }
         }
 
-        // Тест 5: Загрузка из несуществующего файла
         public void TestLoadFromFileNotFound()
         {
             Console.WriteLine("Тест 5: Загрузка из несуществующего файла");
@@ -158,7 +149,7 @@ namespace Lab1
             }
             catch (FileNotFoundException)
             {
-                Console.WriteLine("✓ Тест пройден (исключение выброшено корректно)\n");
+                Console.WriteLine("Тест пройден (исключение выброшено корректно)\n");
             }
             catch (Exception ex)
             {
@@ -166,7 +157,6 @@ namespace Lab1
             }
         }
 
-        // Тест 6: Сохранение в файл (асинхронно)
         public async Task TestSaveToFileAsync()
         {
             Console.WriteLine("Тест 6: Сохранение в файл (асинхронно)");
@@ -182,7 +172,7 @@ namespace Lab1
                 string fileContent = await File.ReadAllTextAsync(filePath);
                 Assert(fileContent.Contains("Иван"), "Файл должен содержать данные Person");
 
-                Console.WriteLine("✓ Тест пройден\n");
+                Console.WriteLine("Тест пройден\n");
             }
             finally
             {
@@ -190,7 +180,6 @@ namespace Lab1
             }
         }
 
-        // Тест 7: Загрузка из файла (асинхронно)
         public async Task TestLoadFromFileAsync()
         {
             Console.WriteLine("Тест 7: Загрузка из файла (асинхронно)");
@@ -206,7 +195,7 @@ namespace Lab1
                 Assert(loadedPerson.FirstName == originalPerson.FirstName, "FirstName должен совпадать");
                 Assert(loadedPerson.Age == originalPerson.Age, "Age должен совпадать");
 
-                Console.WriteLine("✓ Тест пройден\n");
+                Console.WriteLine("Тест пройден\n");
             }
             finally
             {
@@ -214,7 +203,6 @@ namespace Lab1
             }
         }
 
-        // Тест 8: Сохранение списка в файл
         public void TestSaveListToFile()
         {
             Console.WriteLine("Тест 8: Сохранение списка в файл");
@@ -246,7 +234,7 @@ namespace Lab1
                 Assert(fileContent.Contains("Иван"), "Файл должен содержать первого Person");
                 Assert(fileContent.Contains("Мария"), "Файл должен содержать второго Person");
 
-                Console.WriteLine("✓ Тест пройден\n");
+                Console.WriteLine("Тест пройден\n");
             }
             finally
             {
@@ -254,7 +242,6 @@ namespace Lab1
             }
         }
 
-        // Тест 9: Загрузка списка из файла
         public void TestLoadListFromFile()
         {
             Console.WriteLine("Тест 9: Загрузка списка из файла");
@@ -286,7 +273,7 @@ namespace Lab1
                 Assert(loadedPeople[0].FirstName == originalPeople[0].FirstName, "Первый Person должен совпадать");
                 Assert(loadedPeople[1].FirstName == originalPeople[1].FirstName, "Второй Person должен совпадать");
 
-                Console.WriteLine("✓ Тест пройден\n");
+                Console.WriteLine("Тест пройден\n");
             }
             finally
             {
@@ -294,7 +281,6 @@ namespace Lab1
             }
         }
 
-        // Тест 10: Проверка JsonIgnore для Password
         public void TestPasswordJsonIgnore()
         {
             Console.WriteLine("Тест 10: Проверка JsonIgnore для Password");
@@ -306,14 +292,12 @@ namespace Lab1
             Assert(!json.Contains("Password"), "JSON не должен содержать поле Password");
             Assert(!json.Contains("super_secret_password"), "JSON не должен содержать значение Password");
 
-            // При десериализации Password должен быть пустым
             Person deserialized = _serializer.DeserializeFromJson(json);
             Assert(deserialized.Password == string.Empty, "Password должен быть пустым после десериализации");
 
-            Console.WriteLine("✓ Тест пройден\n");
+            Console.WriteLine("Тест пройден\n");
         }
 
-        // Тест 11: Проверка JsonPropertyName для Id и PhoneNumber
         public void TestJsonPropertyName()
         {
             Console.WriteLine("Тест 11: Проверка JsonPropertyName");
@@ -328,15 +312,13 @@ namespace Lab1
             Assert(!json.Contains("\"Id\""), "JSON не должен содержать 'Id'");
             Assert(!json.Contains("\"PhoneNumber\""), "JSON не должен содержать 'PhoneNumber'");
 
-            // Проверяем, что десериализация работает с переименованными полями
             Person deserialized = _serializer.DeserializeFromJson(json);
             Assert(deserialized.Id == "test-id-123", "Id должен корректно десериализоваться");
             Assert(deserialized.PhoneNumber == "+7-999-999-99-99", "PhoneNumber должен корректно десериализоваться");
 
-            Console.WriteLine("✓ Тест пройден\n");
+            Console.WriteLine("Тест пройден\n");
         }
 
-        // Вспомогательный метод для проверки утверждений
         private void Assert(bool condition, string message)
         {
             if (!condition)
@@ -345,7 +327,6 @@ namespace Lab1
             }
         }
 
-        // Метод для запуска всех тестов
         public static async Task RunAllTests()
         {
             Console.WriteLine("=== Запуск тестов PersonSerializer ===\n");
@@ -370,7 +351,7 @@ namespace Lab1
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"\n✗ ОШИБКА: {ex.Message}");
+                Console.WriteLine($"\nОШИБКА: {ex.Message}");
                 Console.WriteLine($"Стек вызовов: {ex.StackTrace}");
             }
         }
