@@ -74,12 +74,12 @@ dotnet run
 
 ```json
 {
-  "FirstName": "Иван",
-  "LastName": "Иванов",
-  "Age": 25,
-  "personId": "12345",
-  "_birthDate": "1999-01-15T00:00:00",
-  "Email": "ivan@example.com",
+  "FirstName": "Artak",
+  "LastName": "Oganisyan",
+  "Age": 18,
+  "personId": "12345secret",
+  "_birthDate": "2007-12-16:T00:00:00",
+  "Email": "artak@example.com",
   "phone": "+7-999-123-45-67"
 }
 ```

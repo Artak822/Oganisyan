@@ -1,6 +1,7 @@
 using System.Text.Json;
+using Lab1.Models;
 
-namespace Lab1
+namespace Lab1.Services
 {
     public class PersonSerializer
     {

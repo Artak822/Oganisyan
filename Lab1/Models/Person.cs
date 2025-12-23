@@ -1,6 +1,6 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
-namespace Lab1
+namespace Lab1.Models
 {
     public class Person
     {
@@ -45,3 +45,4 @@ namespace Lab1
         public bool IsAdult => Age >= 18;
     }
 }
+

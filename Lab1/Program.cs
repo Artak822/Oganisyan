@@ -1,3 +1,5 @@
+using Lab1.Tests;
+
 namespace Lab1
 {
     class Program

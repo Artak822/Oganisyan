@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace Lab1
+namespace Lab1.Services
 {
     public class FileResourceManager : IDisposable
     {
@@ -176,24 +176,16 @@ namespace Lab1
         {
             if (!_disposed)
             {
-                if (disposing)
+                if (disposing) // Пофиксил 👍😎👌🔥🤙 
+   
                 {
-                    using (_writer)
-                    {
-                        _writer?.Dispose();
-                    }
+                    _writer?.Dispose();
                     _writer = null;
 
-                    using (_reader)
-                    {
-                        _reader?.Dispose();
-                    }
+                    _reader?.Dispose();
                     _reader = null;
 
-                    using (_fileStream)
-                    {
-                        _fileStream?.Dispose();
-                    }
+                    _fileStream?.Dispose();
                     _fileStream = null;
                 }
 
