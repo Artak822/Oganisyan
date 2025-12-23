@@ -1,5 +1,7 @@
 using System.Collections;
 
+namespace Lab3.Collections;
+
 public class BidirectionalLinkedList : IEnumerable, IList
 {
     private class Node

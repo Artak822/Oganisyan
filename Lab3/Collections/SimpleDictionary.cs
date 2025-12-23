@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
+namespace Lab3.Collections;
+
 public class SimpleDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue>, IEnumerable<KeyValuePair<TKey, TValue>>
     where TKey : notnull
 {

@@ -1,4 +1,6 @@
-﻿var list = new SimpleList();
+﻿using Lab3.Collections;
+
+var list = new SimpleList();
 list.Add("first");
 list.Add("second");
 list.Add("third");

@@ -1,5 +1,7 @@
 using System.Collections;
 
+namespace Lab3.Collections;
+
 public class SimpleList : IEnumerable, ICollection, IList
 {
     private object[] _items;

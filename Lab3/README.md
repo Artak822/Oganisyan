@@ -46,3 +46,4 @@ dotnet run
 cd Lab3.Tests
 dotnet test
 ```
+
