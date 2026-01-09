@@ -1,0 +1,92 @@
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: wishlist-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: wishlistdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./liquibase/changelog:/liquibase/changelog
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - wishlist-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: wishlist-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - wishlist-network
+
+  liquibase:
+    image: liquibase/liquibase:latest
+    container_name: wishlist-liquibase
+    depends_on:
+      postgres:
+        condition: service_healthy
+    working_dir: /liquibase/changelog
+    environment:
+      - LIQUIBASE_SEARCH_PATH=/liquibase/changelog
+    command: 
+      - --changelog-file=changelog-master.xml
+      - --url=jdbc:postgresql://postgres:5432/wishlistdb
+      - --username=postgres
+      - --password=postgres
+      - --driver=org.postgresql.Driver
+      - --classpath=/liquibase/lib
+      - update
+    volumes:
+      - ./liquibase/changelog:/liquibase/changelog
+      - ./liquibase/lib:/liquibase/lib
+    networks:
+      - wishlist-network
+
+  api:
+    build:
+      context: .
+      dockerfile: src/WishList.API/Dockerfile
+    container_name: wishlist-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      liquibase:
+        condition: service_completed_successfully
+    ports:
+      - "5001:8080"
+      - "5002:443"
+      - "9090:9090"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=wishlistdb;Username=postgres;Password=postgres
+      - ConnectionStrings__Redis=redis:6379
+    networks:
+      - wishlist-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  wishlist-network:
+    driver: bridge
+

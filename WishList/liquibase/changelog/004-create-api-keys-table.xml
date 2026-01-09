@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="004-create-api-keys-table" author="wishlist">
+        <createTable tableName="ApiKeys">
+            <column name="Id" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="Key" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Name" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ExpiresAt" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IsActive" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CreatedAt" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UpdatedAt" type="timestamp">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createIndex indexName="IX_ApiKeys_Key" tableName="ApiKeys">
+            <column name="Key"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
+
