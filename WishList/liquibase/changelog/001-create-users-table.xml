@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="001-create-users-table" author="wishlist">
+        <createTable tableName="Users">
+            <column name="Id" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="Username" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PasswordHash" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Role" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CreatedAt" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UpdatedAt" type="timestamp">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createIndex indexName="IX_Users_Username" tableName="Users">
+            <column name="Username"/>
+        </createIndex>
+
+        <createIndex indexName="IX_Users_Email" tableName="Users">
+            <column name="Email"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
+

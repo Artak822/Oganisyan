@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="002-create-wishes-table" author="wishlist">
+        <createTable tableName="Wishes">
+            <column name="Id" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="Title" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Description" type="varchar(1000)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="Link" type="varchar(500)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="Price" type="decimal(10,2)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="IdempotencyKey" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="CreatedByUserId" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IsPublic" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CreatedAt" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UpdatedAt" type="timestamp">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="Wishes"
+            baseColumnNames="CreatedByUserId"
+            constraintName="FK_Wishes_Users"
+            referencedTableName="Users"
+            referencedColumnNames="Id"
+            onDelete="CASCADE"/>
+
+        <createIndex indexName="IX_Wishes_CreatedByUserId" tableName="Wishes">
+            <column name="CreatedByUserId"/>
+        </createIndex>
+
+        <createIndex indexName="IX_Wishes_IdempotencyKey" tableName="Wishes">
+            <column name="IdempotencyKey"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
+

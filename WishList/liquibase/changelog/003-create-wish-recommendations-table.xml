@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="003-create-wish-recommendations-table" author="wishlist">
+        <createTable tableName="WishRecommendations">
+            <column name="Id" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="UserId" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+            <column name="WishId" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IsViewed" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RecommendedAt" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="WishRecommendations"
+            baseColumnNames="UserId"
+            constraintName="FK_WishRecommendations_Users"
+            referencedTableName="Users"
+            referencedColumnNames="Id"
+            onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint
+            baseTableName="WishRecommendations"
+            baseColumnNames="WishId"
+            constraintName="FK_WishRecommendations_Wishes"
+            referencedTableName="Wishes"
+            referencedColumnNames="Id"
+            onDelete="CASCADE"/>
+
+        <createIndex indexName="IX_WishRecommendations_UserId" tableName="WishRecommendations">
+            <column name="UserId"/>
+        </createIndex>
+
+        <createIndex indexName="IX_WishRecommendations_WishId" tableName="WishRecommendations">
+            <column name="WishId"/>
+        </createIndex>
+
+        <createIndex indexName="IX_WishRecommendations_UserId_WishId" tableName="WishRecommendations" unique="true">
+            <column name="UserId"/>
+            <column name="WishId"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
+
